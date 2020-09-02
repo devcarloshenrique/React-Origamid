@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React para iniciantes</title>
-    <script
-      src="https://unpkg.com/react@16/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
-      crossorigin
-    ></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="app-react">
-      <script type="text/babel">
-        const Comprar = () => {
-          const [contador, setContador] = React.useState(1);
 
-          return (
-            <div>
-              <p>Total: {contador}</p>
-              <p>Preço: {contador * 250}</p>
-              <button onClick={() => setContador(contador + 1)}>Comprar</button>
-            </div>
-          );
-        };
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React para iniciantes</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
 
-        ReactDOM.render(<Comprar />, document.getElementById('app-react'));
-      </script>
-    </div>
-  </body>
+<body>
+  <div id="app-react"></div>
+  <script type="text/babel">
+    const Comprar = () => {
+      const [contador, setContador] = React.useState(1);
+
+      return (
+        <div>
+          <p>Total: {contador}</p>
+          <p>Preço: {contador * 250}</p>
+          <button onClick={() => setContador(contador + 1)}>Comprar</button>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<Comprar />, document.getElementById('app-react'));
+  </script>
+</body>
+
 </html>

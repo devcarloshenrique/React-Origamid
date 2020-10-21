@@ -36,7 +36,6 @@ document.addEventListener('click', handleMouse);
 
 const frutas = ['banana', 'uva'];
 const [fruta1, fruta2] = frutas;
-
 // Destructuring função
 
 const useQuadrado = [

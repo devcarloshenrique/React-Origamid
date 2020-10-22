@@ -20,6 +20,7 @@ const Produtos = () => {
                   <li>{propriedade}</li>
                 ))}
               </ul>
+              <input type="text" />
             </fieldset>
           </p>
         </>

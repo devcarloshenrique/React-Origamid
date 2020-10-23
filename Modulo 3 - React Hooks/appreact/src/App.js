@@ -109,6 +109,9 @@ const App4 = function () {
   );
 };
 
+/**
+ * UseState
+ */
 const App5 = () => {
   const [contar, setContar] = React.useState(0);
 
@@ -123,6 +126,9 @@ const App5 = () => {
   return <button onClick={() => setContar(contar + 1)}>{contar}</button>;
 };
 
+/**
+ * UseState
+ */
 const App6 = () => {
   const [contar, setContar] = React.useState(0);
   const [dados, setDados] = React.useState(null);
@@ -152,6 +158,10 @@ const App6 = () => {
   );
 };
 
+/**
+ * UseState
+ */
+
 const App7 = () => {
   const [ativo, setAtivo] = React.useState(false);
 
@@ -163,6 +173,9 @@ const App7 = () => {
   );
 };
 
+/**
+ * UseState
+ */
 const App8 = () => {
   const [produto, setProduto] = React.useState(null);
 
@@ -191,4 +204,65 @@ const App8 = () => {
   );
 };
 
-export default App8;
+/**
+ * Use Ref
+ */
+const App9 = () => {
+  const [comentarios, setComentarios] = React.useState(['teste', 'teste2']);
+  const [input, setInput] = React.useState('');
+  const inputElement = React.useRef('');
+
+  function handleClick() {
+    if (input !== '') {
+      setComentarios([...comentarios, input]);
+      setInput('');
+      inputElement.current.focus();
+    }
+  }
+
+  return (
+    <div>
+      <ul>
+        {comentarios.map((comentario, index) => (
+          <li key={index}>{comentario}</li>
+        ))}
+        <input
+          type="text"
+          ref={inputElement}
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
+        <button onClick={handleClick}>Enviar</button>
+      </ul>
+    </div>
+  );
+};
+
+/**
+ * UseRef
+ */
+
+const App10 = () => {
+  const [carrinho, setCarrinho] = React.useState(0);
+  const [notificacao, setNotificacao] = React.useState(null);
+  const timeoutRef = React.useRef();
+
+  function handleClick() {
+    setCarrinho(carrinho + 1);
+    setNotificacao('Item adicionado ao carinho');
+
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setNotificacao(null);
+    }, 1000);
+  }
+
+  return (
+    <div>
+      <p>{notificacao}</p>
+      <button onClick={handleClick}>Adicionar Carrinho {carrinho}</button>
+    </div>
+  );
+};
+
+export default App10;

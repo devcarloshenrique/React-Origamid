@@ -1,6 +1,10 @@
 import React from 'react';
 import Input from './Form/input';
 import Select from './Form/select';
+import Radio from './Form/radio';
+import Checkbox from './Form/checkbox';
+import useForm from './Hooks/useForm';
+
 /**
  * Formulário Reativo
  */
@@ -449,4 +453,132 @@ const App11 = () => {
   );
 };
 
-export default App11;
+/**
+ * Component Options
+ */
+
+const App12 = () => {
+  const [cor, setCor] = React.useState('');
+
+  return (
+    <form>
+      <Radio
+        options={['azul', 'verde', 'amarelo']}
+        value={cor}
+        setValue={setCor}
+      />
+    </form>
+  );
+};
+
+/**
+ * Component Checkbox
+ */
+
+const App13 = () => {
+  const [linguagens, setLinguagens] = React.useState([]);
+
+  return (
+    <form action="">
+      <Checkbox
+        options={['Javascript', 'PHP', 'Ruby']}
+        value={linguagens}
+        setValue={setLinguagens}
+      />
+    </form>
+  );
+};
+
+/**
+ * Validação sem Hooks
+ */
+
+const App14 = () => {
+  const [cep, setCep] = React.useState('');
+  const [error, setError] = React.useState(null);
+
+  function validateCep(value) {
+    if (value.length === 0) {
+      setError('Preencha um valor');
+      return false;
+    } else if (!/^\d{5}-?\d{3}$/.test(value)) {
+      setError('Preencha um cep válido');
+      return false;
+    } else {
+      setError(null);
+      return true;
+    }
+  }
+
+  function handleBlur({ target }) {
+    validateCep(target.value);
+  }
+
+  function handleChange({ target }) {
+    if (error) validateCep(target.value);
+    setCep(target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (validateCep(cep)) {
+      console.log('Enviou');
+    } else {
+      console.log('Não enviou');
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
+        label="Cep"
+        id="cep"
+        type="text"
+        value={cep}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        placeholder="00000-000"
+      />
+      {error && <p>{error}</p>}
+      <button>Enviar</button>
+    </form>
+  );
+};
+
+/**
+ * Validação com Hooks
+ */
+
+const App15 = () => {
+  const cep = useForm('cep');
+  const email = useForm('email');
+  const nome = useForm('');
+  const sobrenome = useForm(false);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (cep.validate() && email.validate()) {
+      console.log('Enviar');
+    } else {
+      console.log('Não enviar');
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
+        label="CEP"
+        id="cep"
+        type="text"
+        placeholder="00000-000"
+        {...cep}
+      />
+      <Input label="Email" id="email" type="text" {...email} />
+      <Input label="Nome" id="nome" type="text" {...nome} />
+      <Input label="Sobrenome" id="sobrenome" type="text" {...sobrenome} />
+      <button>Enviar</button>
+    </form>
+  );
+};
+
+export default App15;

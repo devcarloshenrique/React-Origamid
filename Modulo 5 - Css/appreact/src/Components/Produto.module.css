@@ -1,0 +1,19 @@
+.titulo {
+  color: #43c;
+}
+
+.preco-total {
+  font-weight: bold;
+}
+
+.comprarProduto {
+  transform: rotate(90deg) translateY(-120px);
+}
+
+/** 
+  Estilo fica global com :global
+*/
+
+:global .container {
+  max-width: 900px;
+}
